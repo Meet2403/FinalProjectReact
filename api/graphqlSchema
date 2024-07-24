@@ -1,0 +1,43 @@
+  scalar GraphQLDate
+
+  type Employee {
+    _id: String!
+    firstName: String!
+    lastName: String!
+    age: Int!
+    dateOfJoining: GraphQLDate
+    title: String!
+    department: String!
+    employeeType: String!
+    currentStatus: Int!
+  }
+
+  type Query {
+    getAllEmployees: [Employee!]!
+    getEmployeeById(_id:ID!):Employee
+    getEmployeeByType(employeeType:String):[Employee]
+  }
+
+  input createEmployee {
+    firstName: String!
+    lastName: String!
+    age: Int!
+    dateOfJoining: GraphQLDate!
+    title: String!
+    department: String!
+    employeeType: String!
+    currentStatus: Int = 1
+  }
+
+  input editEmployee {
+   title: String!
+   department: String!
+   employeeType: String!
+   currentStatus: Int!
+  }
+
+  type Mutation {
+    addNewEmployee(employee: createEmployee!): Employee!
+    editEmployee(_id: ID!, employee: editEmployee!): Employee!
+    deleteEmployee(_id: ID!): Employee
+  }
